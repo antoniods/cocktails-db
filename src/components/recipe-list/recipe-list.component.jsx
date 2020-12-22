@@ -4,10 +4,10 @@ import './recipe-list.styles.css';
 
 export const RecipeList = props => (
     <div className='recipe-list'>
-        {props.recipes.map(recipe => (
-         <Recipe key={recipe.idMeal} recipe={recipe} />
+        {props.ricette.map(ricetta => (
+         <Recipe key={ricetta.id} ricetta={ricetta} />
         ))}
     </div>
 );
 
-export default RecipeList;
+// export default RecipeList;

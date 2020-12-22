@@ -3,12 +3,13 @@ import './recipe.styles.css';
 
 export const Recipe = props => (
 <div className="recipe-container">
-    {/* <img 
+    <img 
     alt="recipe" 
-    src={`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${props.recipe.idMeal}`} //?set=set2&size=180x180
-    /> */}
+    src={`https://spoonacular.com/recipeImages/${props.ricetta.id}-90x90.${props.ricetta.imageType}`}
+    />
     
-    <h2> {props.recipe.strMeal}</h2>
-    <p> {props.recipe.strCategory}</p>
+    <h2> {props.ricetta.id}</h2>
+    <p> {props.ricetta.title}</p>
 </div>
 );
+

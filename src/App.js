@@ -8,15 +8,15 @@ class App extends Component {
    super();
  
      this.state = {
-       recipes : [],
+       ricette : [],
        searchField : ''
      };
  }
  
  componentDidMount(){
-   fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+   fetch('https://api.spoonacular.com/recipes')
    .then(response => response.json())
-   .then(users => this.setState({recipes:users}));
+   .then(recipes => this.setState({ricette:recipes}));
    }
  
     render() {
@@ -24,9 +24,9 @@ class App extends Component {
      
      // const monster = this.state.monsters;
      // const searchField = this.state.searchField; al posto di scrivere cosi semplifico ....
-     const {recipes, searchField } = this.state;
-     const filteredRecipes = recipes.filter (recipes => 
-       recipes.strMeal.toLowerCase().includes(searchField.toLowerCase()) //toLowerCase per il render e per stare sicuri nel caso si scriva con in maiuscolo
+     const {ricette, searchField } = this.state;
+     const filteredRecipes = ricette.filter(ricette => 
+       ricette.title.toLowerCase().includes(searchField.toLowerCase()) //toLowerCase per il render e per stare sicuri nel caso si scriva con in maiuscolo
        )
  
    
