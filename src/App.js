@@ -1,45 +1,32 @@
-import React, {Component} from 'react';
-import { RecipeList } from './components/recipe-list/recipe-list.component';
-import { SearchBox } from './components/search-box/search-box.component';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-class App extends Component {
-  constructor() {
-   super();
- 
-     this.state = {
-       ricette : [],
-       searchField : ''
-     };
- }
- 
- componentDidMount(){
-   fetch('https://api.spoonacular.com/recipes')
-   .then(response => response.json())
-   .then(recipes => this.setState({ricette:recipes}));
-   }
- 
-    render() {
-   
-     
-     // const monster = this.state.monsters;
-     // const searchField = this.state.searchField; al posto di scrivere cosi semplifico ....
-     const {ricette, searchField } = this.state;
-     const filteredRecipes = ricette.filter(ricette => 
-       ricette.title.toLowerCase().includes(searchField.toLowerCase()) //toLowerCase per il render e per stare sicuri nel caso si scriva con in maiuscolo
-       )
- 
-   
-     return (
-     <div className="App">
-       <h1>The Best Recipes website</h1>
-       <SearchBox
-         placeholder='Search the recipe' 
-         handleChange={e => this.setState({ searchField: e.target.value} )}
-         />
-       <RecipeList recipes={filteredRecipes}/>               
-     </div>
-    );
-  }
- }
- export default App;
+// import pages
+import Home from "./pages/Home";
+import About from "./pages/About";
+import SingleCocktail from "./pages/SingleCocktail";
+import Error from "./pages/Error";
+
+import Navbar from "./components/Navbar";
+
+export default function App() {
+  return (
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/cocktail/:id">
+          <SingleCocktail />
+        </Route>
+        <Route path="*">
+          <Error />
+        </Route>
+      </Switch>
+    </Router>
+  );
+}
