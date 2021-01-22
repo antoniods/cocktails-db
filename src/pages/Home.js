@@ -1,13 +1,11 @@
 import React from "react";
 import CocktailList from "../components/CocktailList";
 import SearchForm from "../components/SearchForm";
-
 export default function Home() {
   const [loading, setLoading] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState("a");
   const [cocktails, setCocktails] = React.useState([]);
 
-  // calling api
   React.useEffect(() => {
     setLoading(true);
     async function getDrinks() {
@@ -26,10 +24,11 @@ export default function Home() {
               strAlcoholic,
               strGlass,
             } = item;
+
             return {
               id: idDrink,
               name: strDrink,
-              img: strDrinkThumb,
+              image: strDrinkThumb,
               info: strAlcoholic,
               glass: strGlass,
             };
@@ -43,12 +42,13 @@ export default function Home() {
       }
       setLoading(false);
     }
+
     getDrinks();
   }, [searchTerm]);
   return (
     <main>
       <SearchForm setSearchTerm={setSearchTerm} />
-      <CocktailList loading={loading} cocktails={cocktails} />
+      <CocktailList cocktails={cocktails} loading={loading} />
     </main>
   );
 }
